@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import EventCard from '../components/EventCard';
 import AdminEventForm from '../components/AdminEventForm';
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
+
 export default function AdminDashboard() {
   const [events, setEvents] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -14,7 +16,6 @@ export default function AdminDashboard() {
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const token = localStorage.getItem('token');
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
 
   // Memoize config so it doesn't change each render
   const config = useMemo(() => ({
@@ -58,7 +59,7 @@ export default function AdminDashboard() {
     } finally {
       setLoadingEvents(false);
     }
-  }, [apiFetch, baseUrl]);
+  }, [apiFetch]);
 
   const fetchBookings = useCallback(async () => {
     setLoadingBookings(true);
@@ -72,7 +73,7 @@ export default function AdminDashboard() {
     } finally {
       setLoadingBookings(false);
     }
-  }, [apiFetch, baseUrl]);
+  }, [apiFetch]);
 
   useEffect(() => {
     console.log('AdminDashboard rendered');

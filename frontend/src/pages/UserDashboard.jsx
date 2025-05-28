@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
+
 export default function UserDashboard() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -7,7 +9,6 @@ export default function UserDashboard() {
   const [cancelingId, setCancelingId] = useState(null);
 
   const token = localStorage.getItem('token');
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
 
   const config = useMemo(() => ({
     headers: {
@@ -35,7 +36,7 @@ export default function UserDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [config, baseUrl]);
+  }, [config]);
 
   const handleCancel = async (id) => {
     if (!window.confirm('Are you sure you want to cancel this booking?')) return;

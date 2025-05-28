@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
+
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -9,8 +11,6 @@ export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api/auth';
 
   const handleChange = e => {
     const { name, value } = e.target;

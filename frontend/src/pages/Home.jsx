@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import EventCard from '../components/EventCard';
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
+
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -29,7 +29,7 @@ export default function Home() {
     };
 
     fetchEvents();
-  }, [baseUrl]);
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto px-4 mt-6">

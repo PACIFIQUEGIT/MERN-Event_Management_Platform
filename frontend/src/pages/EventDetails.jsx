@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import BookingForm from '../components/BookingForm';
 import { AuthContext } from '../contexts/AuthContext';
 
+const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
+
 export default function EventDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,7 +16,6 @@ export default function EventDetails() {
   const [message, setMessage] = useState(null);
 
   const token = localStorage.getItem('token');
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
 
   const config = useMemo(() => ({
     headers: {
@@ -40,7 +41,7 @@ export default function EventDetails() {
     } finally {
       setLoading(false);
     }
-  }, [id, baseUrl, config.headers]);
+  }, [id, config.headers]);
 
   useEffect(() => {
     fetchEvent();
