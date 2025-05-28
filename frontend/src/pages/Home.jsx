@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import EventCard from '../components/EventCard';
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
-console.log(process.env.REACT_APP_API_BASE_URL);
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,6 +9,7 @@ export default function Home() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000/api';
         const res = await fetch(`${baseUrl}/events`);
 
         if (!res.ok) {
